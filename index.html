@@ -36,7 +36,8 @@
                   />
                 </label>
 
-                <img width="60" id="preview" src="" alt="" />
+                <div id="preview"></div>
+
                 <br />
 
                 <input
@@ -58,19 +59,15 @@
       const preview = document.getElementById("preview");
 
       input.onchange = (e) => {
-        let { type } = e.target.files[0];
-        // console.log(type);
-        if (
-          type == "image/jpeg" ||
-          type == "image/jpg" ||
-          type == "image/png"
-        ) {
-          let url = URL.createObjectURL(e.target.files[0]);
-          console.log(url);
-          preview.setAttribute("src", url);
-        } else {
-          console.log("file type dones not allow");
+        const files = e.target.files;
+
+        let prev = "";
+        for (file of files) {
+          let url = URL.createObjectURL(file);
+          prev += `<img src="${url}" width="60" >`;
         }
+        preview.innerHTML = prev;
+        // console.log(file);
       };
     </script>
   </body>
