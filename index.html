@@ -39,7 +39,12 @@
                 <img width="60" id="preview" src="" alt="" />
                 <br />
 
-                <input id="mutiple" type="file" style="display: none" />
+                <input
+                  id="mutiple"
+                  type="file"
+                  style="display: none"
+                  multiple
+                />
                 <input type="submit" class="btn btn-info" value="Upload" />
               </form>
             </div>
@@ -48,6 +53,25 @@
       </div>
     </div>
 
-    <script></script>
+    <script>
+      const input = document.getElementById("mutiple");
+      const preview = document.getElementById("preview");
+
+      input.onchange = (e) => {
+        let { type } = e.target.files[0];
+        // console.log(type);
+        if (
+          type == "image/jpeg" ||
+          type == "image/jpg" ||
+          type == "image/png"
+        ) {
+          let url = URL.createObjectURL(e.target.files[0]);
+          console.log(url);
+          preview.setAttribute("src", url);
+        } else {
+          console.log("file type dones not allow");
+        }
+      };
+    </script>
   </body>
 </html>
